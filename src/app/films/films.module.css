@@ -1,0 +1,13 @@
+
+.containerFilms{
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(200px, 1fr)
+    );
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
