@@ -4,8 +4,8 @@
 
 body {
   background-image: url("../../public/iStock-124980570.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
+  overflow-y: auto;
 }
 .hidden {
     display: none;
