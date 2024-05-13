@@ -12,12 +12,24 @@ export default function characters () {
     const dispatch = useDispatch()
 
     const fetchCharacters = async () => {
-        try{
-            const { data } = await axios.get('https://swapi.dev/api/people')
-            console.log(data.results)
-            dispatch(setCharacters(data.results))
-        }catch(err) {
-            console.log(err)
+        try {
+            const { data } = await axios.get('https://swapi.dev/api/people');
+            console.log(data.results);
+            if (data.results) {
+                const charactersFiltered = data.results.map((character) => {
+                    let characterFiltered = {};
+                    Object.entries(character).forEach(([key, value]) => {
+                        if (value !== 'n/a' && value !== 'unknown') {
+                            characterFiltered[key] = value;
+                        }
+                    });
+                    return characterFiltered;
+                });
+                console.log(charactersFiltered);
+                dispatch(setCharacters(charactersFiltered));
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 

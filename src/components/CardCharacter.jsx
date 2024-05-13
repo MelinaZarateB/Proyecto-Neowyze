@@ -10,10 +10,10 @@ export default function CardCharacter ({ name, eyeColor, gender }) {
                 className="w-auto h-[370px]" />
             </div>
             <div className="text-center text-white">
-                <span> Eye color: {eyeColor}</span>
+                {eyeColor? <span> Eye color: {eyeColor}</span> : ''}
             </div>
             <div className="text-center text-white">
-                <span> Gender: {gender}</span>
+                {gender?  <span> Gender: {gender}</span> : ''}
             </div>
         </section>
     )
