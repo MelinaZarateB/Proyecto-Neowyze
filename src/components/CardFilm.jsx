@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CardFilm({ title, episode }) {
   return (
+    <Link href={`/films/${episode}`}>
     <section className="bg-black rounded-3xl w-[250px] cursor-pointer transform transition-transform duration-250 ease-out hover:scale-105">
       <div className="text-center text-white">
-        <h2>{title}</h2>
+        <h2 className="font-bold text-lg">{title}</h2>
       </div>
       <div>
         <img
@@ -16,5 +18,6 @@ export default function CardFilm({ title, episode }) {
         <span>Episode {episode} </span>
       </div>
     </section>
+    </Link>
   );
 }

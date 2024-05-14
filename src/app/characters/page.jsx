@@ -1,51 +1,55 @@
-'use client'
-import { useEffect } from "react"
-import { setCharacters } from "@/redux/slice";
-import { useSelector, useDispatch } from "react-redux";
-import axios from 'axios';
+"use client";
+import { useEffect } from "react";
+import { useState } from "react";
 import CardCharacter from "@/components/CardCharacter";
-import styles from './characters.module.css';
+import styles from "./characters.module.css";
+import { fetchCharacters } from "@/data";
+import InfiniteScroll from "react-infinite-scroll-component";
 
+export default function Characters() {
+  const [page, setPage] = useState(1);
+  const [charactersRender, setCharactersRender] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
 
-export default function characters () {
-    const characters = useSelector((state) => state.valores.characters)
-    const dispatch = useDispatch()
-
-    const fetchCharacters = async () => {
-        try {
-            const { data } = await axios.get('https://swapi.dev/api/people');
-            console.log(data.results);
-            if (data.results) {
-                const charactersFiltered = data.results.map((character) => {
-                    let characterFiltered = {};
-                    Object.entries(character).forEach(([key, value]) => {
-                        if (value !== 'n/a' && value !== 'unknown') {
-                            characterFiltered[key] = value;
-                        }
-                    });
-                    return characterFiltered;
-                });
-                console.log(charactersFiltered);
-                dispatch(setCharacters(charactersFiltered));
-            }
-        } catch (err) {
-            console.log(err);
-        }
+  const getMoreCharacters = async () => {
+    try {
+      const newChars = await fetchCharacters(page);
+      if (newChars.length > 0) {
+        setCharactersRender((prevChars) => [...prevChars, ...newChars]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+        setHasMore(false)
+      console.error("Error fetching characters:", error);
     }
+  };
 
-    useEffect(() => {
-        fetchCharacters()
-    },[])
+  useEffect(() => {
+    getMoreCharacters();
+  }, []);
 
-    return(
-       <div className={styles.containerCharacters}>
-        {characters?.map((char, index) => (
-            <CardCharacter
+  return (
+    <InfiniteScroll
+      dataLength={charactersRender.length}
+      next={getMoreCharacters}
+      hasMore={hasMore}
+      loader={<h4 style={{color:'white', textAlign:'center'}}>Loading...</h4>}
+      endMessage={<h4 style={{color: 'white', textAlign: 'center'}}>
+        No more characters!
+      </h4>}
+    >
+      <div className={styles.containerCharacters}>
+        {charactersRender?.map((char, index) => (
+          <CardCharacter
             key={index}
             name={char.name}
             eyeColor={char.eye_color}
-            gender={char.gender} />
+            gender={char.gender}
+          />
         ))}
-       </div>
-    )
+      </div>
+    </InfiniteScroll>
+  );
 }
