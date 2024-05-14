@@ -1,11 +1,12 @@
 import { fetchFilmsById } from "@/data";
 import styles from "./detail.module.css";
 import CardCharacter from "@/components/CardCharacter";
+import { fetchCharactersByDetail } from "@/data";
 
 export default async function detailFilm({ params }) {
   const { id } = params;
-
   const filmById = await fetchFilmsById(id);
+  const characters = await fetchCharactersByDetail(filmById.characters)
 
   return (
     <div className="text-white p-10">
@@ -19,16 +20,29 @@ export default async function detailFilm({ params }) {
         <div className={styles.containerDescription}>
           <h1 className={styles.title}>{filmById?.title}</h1>
           <div className={styles.data}>
+            <div className="flex">
+            <img width="30" height="48" className={styles.icon} src="https://img.icons8.com/color/48/star-wars-millenium-falcon.png" alt="star-wars-millenium-falcon"/>
             <p>Episode {filmById.episode_id}</p>
+            </div>
+            <div className="flex">
+            <img width="30" height="48" className={styles.icon} src="https://img.icons8.com/color/48/star-wars-millenium-falcon.png" alt="star-wars-millenium-falcon"/>
             <p>Director: {filmById.director}</p>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <h2 className="text-center">Characters</h2>
+      <div className={styles.secondDiv}>
+        <h2 className={styles.titleCharacters}>Characters</h2>
+        <hr className={styles.hr}/>
       </div>
-      <div className={styles.characters}>
-      
+      <div className={styles.charactersContainer}>
+      {characters?.map((char, index) => (
+        <CardCharacter 
+        key={index}
+        name={char.name}
+        url={char.url}
+        />
+      ))}
       </div>
     </div>
   );

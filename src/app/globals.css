@@ -10,3 +10,34 @@ body {
 .hidden {
     display: none;
   }
+
+.button{
+  align-content: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 0 0 #ffff;
+  transition: ease-out .4s;
+  outline: none;
+  width: 292px;
+  height: 150px;
+}
+.button:hover{
+  box-shadow: inset 292px 0 0 0 #a31f1fa8;
+  color: black;
+}
+
+.container{
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  gap: 20px
+}
+@media screen and (max-width: 996px){
+  .container{
+    flex-direction: column;
+  }
+}
+main{
+  justify-content: center;
+}
