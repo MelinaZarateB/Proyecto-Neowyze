@@ -1,25 +1,17 @@
 import axios from "axios";
+import filteredData from "./helpers/filteredData";
 
-export const fetchCharacters = async (page=1) => {
-  try {
-    const { data } = await axios.get(`https://swapi.dev/api/people/?page=${page}`);
-    if (data.results) {
-      const charactersFiltered = data.results.map((character) => {
-        let characterFiltered = {};
-        Object.entries(character).forEach(([key, value]) => {
-          if (value !== "n/a" && value !== "unknown") {
-            characterFiltered[key] = value;
-          }
-        });
-        return characterFiltered;
-      });
-      console.log(charactersFiltered);
-      return charactersFiltered;
+export const fetchCharacters = async (page = 1) => {
+    try {
+      const { data } = await axios.get(`https://swapi.dev/api/people/?page=${page}`);
+      if (data.results) {
+        const charactersFiltered = data.results.map(filteredData);
+        return charactersFiltered;
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
-};
+  };
 
 export const fetchFilms = async () => {
   try {
@@ -45,8 +37,8 @@ export const fetchFilmsById = async (id) => {
 export const fetchCharacterById = async (id) => {
     try{
         const { data } = await axios.get(`https://swapi.dev/api/people/${id}`)
-        return data
-
+        const characterFilteredById = filteredData(data)
+        return characterFilteredById
     }catch(err){
         console.log(err)
     }

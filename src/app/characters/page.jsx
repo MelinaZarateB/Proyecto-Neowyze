@@ -6,6 +6,7 @@ import styles from "./characters.module.css";
 import { fetchCharacters } from "@/data";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+
 export default function Characters() {
   const [page, setPage] = useState(1);
   const [charactersRender, setCharactersRender] = useState([]);
@@ -47,6 +48,7 @@ export default function Characters() {
             name={char.name}
             eyeColor={char.eye_color}
             gender={char.gender}
+            url={char.url}
           />
         ))}
       </div>
