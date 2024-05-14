@@ -3,14 +3,12 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import Providers from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <Providers>
       <body className={inter.className}>
         <nav
         className="bg-black flex justify-center p-4"
@@ -24,7 +22,6 @@ export default function RootLayout({ children }) {
         </nav>
         {children}
       </body>
-      </Providers>
     </html>
   );
 }
