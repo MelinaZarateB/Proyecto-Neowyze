@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* ajusta el espacio entre los elementos */
     max-width: 1200px;
 }
 .containerImg{

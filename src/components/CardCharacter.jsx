@@ -3,9 +3,7 @@ import Link from "next/link";
 export default function CardCharacter({ name, eyeColor, gender, url }) {
   const parts = url.split("/");
 
-  // Obtener el último segmento que contiene el número
   const id = parts[parts.length - 2];
-  console.log(id);
 
   return (
     <Link href={`/characters/${id}`}>
@@ -21,10 +19,10 @@ export default function CardCharacter({ name, eyeColor, gender, url }) {
         />
       </div>
       <div className="text-center text-white">
-        {eyeColor ? <span>Eye color: {eyeColor}</span> : ""}
+        {eyeColor ? <p style={{color:'#b5b7b7', fontWeight: '600'}}>Eye color: {eyeColor}</p> : ""}
       </div>
       <div className="text-center text-white">
-        {gender ? <span>Gender: {gender}</span> : ""}
+        {gender ? <p style={{color:'#b5b7b7', fontWeight: '600'}}>Gender: {gender}</p> : ""}
       </div>
     </section>
     </Link>

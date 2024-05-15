@@ -1,8 +1,6 @@
-'use client'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
@@ -18,7 +16,14 @@ export default function RootLayout({ children }) {
             alt="Logo Star Wars"
             width={300}
             height={200}
+            className="image-navbar-desktop"
           />
+          <Image
+          src="https://lumiere-a.akamaihd.net/v1/images/sw_nav_logo_mobile_659fef1a_1_99c6e87c.png?region=0,0,312,32"
+          alt="Logo Star Wars"
+          width={300}
+          height={200}
+          className="image-navbar-mobile" />
         </nav>
         {children}
       </body>

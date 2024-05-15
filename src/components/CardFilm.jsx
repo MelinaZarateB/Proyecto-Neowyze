@@ -15,7 +15,7 @@ export default function CardFilm({ title, episode }) {
         />
       </div>
       <div className="text-white text-center">
-        <span>Episode {episode} </span>
+        <p style={{color:'#b5b7b7', fontWeight: '600'}}>Episode {episode} </p>
       </div>
     </section>
     </Link>

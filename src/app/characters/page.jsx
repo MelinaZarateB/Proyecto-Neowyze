@@ -36,8 +36,8 @@ export default function Characters() {
       dataLength={charactersRender.length}
       next={getMoreCharacters}
       hasMore={hasMore}
-      loader={<h4 style={{color:'white', textAlign:'center'}}>Loading...</h4>}
-      endMessage={<h4 style={{color: 'white', textAlign: 'center'}}>
+      loader={<h4 style={{color:'white', textAlign:'center', fontSize: '1.5rem', fontWeight: '600'}}>Loading...</h4>}
+      endMessage={<h4 style={{color: 'white', textAlign: 'center', fontWeight: '500', marginBottom: '16px'}}>
         No more characters!
       </h4>}
     >
