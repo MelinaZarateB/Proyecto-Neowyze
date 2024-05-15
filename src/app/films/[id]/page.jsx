@@ -2,11 +2,13 @@ import { fetchFilmsById } from "@/data";
 import styles from "./detail.module.css";
 import CardCharacter from "@/components/CardCharacter";
 import { fetchCharactersByDetail } from "@/data";
+import React, { Suspense } from "react";
 
 export default async function detailFilm({ params }) {
   const { id } = params;
   const filmById = await fetchFilmsById(id);
-  const characters = await fetchCharactersByDetail(filmById.characters)
+
+  const LazyCharacters = React.lazy(() => import("./../../../components/CardCharacterByDetail"));
 
   return (
     <div className="text-white p-10">
@@ -35,14 +37,10 @@ export default async function detailFilm({ params }) {
         <h2 className={styles.titleCharacters}>Characters</h2>
         <hr className={styles.hr}/>
       </div>
-      <div className={styles.charactersContainer}>
-      {characters?.map((char, index) => (
-        <CardCharacter 
-        key={index}
-        name={char.name}
-        url={char.url}
-        />
-      ))}
+      <div>
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+          <LazyCharacters filmById={filmById} />
+        </Suspense>
       </div>
     </div>
   );
